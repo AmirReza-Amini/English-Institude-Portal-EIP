@@ -1,0 +1,3 @@
+<select (change)="value = select.value" class="form-control" #select>
+  <option *ngFor="let s of data" [selected]="selectedValue == s.value" [value]="s.key">{{s.value}}</option>
+</select>

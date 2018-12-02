@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+  <h1 class="h2">{{product}}</h1>
+</div>
+<button *ngIf="!showHide" (click)="showHide = true" class="btn btn-success mb-2">
+  <span class="fa fa-plus">&nbsp;</span>
+  اضافه کردن {{product}} جدید
+</button>
+<div *ngIf="showHide" class="row">
+  <div class="col-7">
+    <form class="col-8 mt-2" #f="ngForm" (ngSubmit)="Save(f.value)">
+      <div class="form-group">
+        <div class="form-group">
+          <label for="title">نام</label>
+          <input required [ngClass]="{'light-error' : title.touched && title.invalid}" #title="ngModel" name="title"
+            [(ngModel)]="currentProduct.title" type="text" class="form-control col-8" id="title" placeholder="عنوان">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-4">
+          <label for="quantity">موجودی</label>
+          <input required [ngClass]="{'light-error' : quantity.touched && quantity.invalid}" #quantity="ngModel" name="quantity"
+            [(ngModel)]="currentProduct.quantity" type="number" min="1" class="form-control ml-2" id="quantity"
+            placeholder="موجودی">
+        </div>
+        <div class="form-group col-4">
+          <label for="criticalQuantity">حداقل</label>
+          <input min="0" required [ngClass]="{'light-error' : criticalQuantity.touched && criticalQuantity.invalid}"
+            #criticalQuantity="ngModel" name="criticalQuantity" [(ngModel)]="currentProduct.criticalQuantity" type="number"
+            class="form-control col ml-2" id="criticalQuantity" placeholder="حداقل موجودی">
+        </div>
+
+        <div class="form-group col">
+          <label for="unitType">واحد</label>
+          <custom-combo type="unit-type" #unitType id="unitType" [selectedValue]="currentProduct.unit" name="unitType"
+            id="unitType" [(ngModel)]="currentProduct.unitType"></custom-combo>
+        </div>
+      </div>
+      <div class="form-group row mr-1">
+        <input required [ngClass]="{'light-error' : price.touched && price.invalid}" #price="ngModel" name="price"
+          [(ngModel)]="currentProduct.price" type="number" min="0" class="form-control col-4" id="price" placeholder="قیمت">
+        <h6 class="mt-2">&nbsp;ريال</h6>
+      </div>
+      <div class="form-group  row">
+        <input #imageSelect type="file" accept="image/*" hidden (change)="OnFileChanged($event.target.files)">
+        <div class="col-6" style="text-align: center">
+          <img [src]="filePath" class="img-thumbnail">
+          <div class="btn-group" style="direction: ltr">
+              <button *ngIf="fileToUpload" type="button"class="mt-1 btn btn-danger">
+                  <i class="fa fa-times fa-lg" (click)="ClearPhoto()" aria-hidden="true"></i>
+                </button>
+            <button type="button" (click)="imageSelect.click()"  class="mt-1 btn btn-secondary">
+              {{fileName}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <button [disabled]="!f.valid" type="submit" class="btn btn-primary mr-2">ذخیره</button>
+      <button class="btn btn-danger mr-2 " *ngIf="showHide" (click)="Reset()">انصراف</button>
+    </form>
+    <h3>{{percentage}}</h3>
+  </div>
+  <div class="col">
+    <img *ngIf="currentProduct.imageUrl && currentProduct.imageUrl.length > 0 else imageNotFound1" [src]="currentProduct.imageUrl"
+      class="img-thumbnail" width="80%">
+    <ng-template #imageNotFound1>
+      <img src="../../assets/img/products/not-found.png" class="img-thumbnail" width="80%">
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="!showHide">
+
+  <table class="table table-hover" style="text-align: center" *ngIf="productList.length>0 else nothingFound">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">تصویر</th>
+        <th scope="col">عنوان</th>
+        <th scope="col">موجودی</th>
+        <th scope="col">مبلغ</th>
+        <th scope="col">تاریخ اضافه شدن</th>
+        <th scope="col">کاربر</th>
+        <th scope="col">عملیات</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productList;let i = index">
+        <td class="align-middle" scope="row">{{i+1}}</td>
+        <td class="align-middle">
+          <img *ngIf="product.imageUrl && product.imageUrl.length > 0 else imageNotFound" [src]="product.imageUrl"
+            width="100px" class="img-thumbnail">
+          <ng-template #imageNotFound>
+            <img src="../../assets/img/products/not-found.png" width="100px" class="img-thumbnail">
+          </ng-template>
+        </td>
+        <td class="align-middle">
+          <span *ngIf="product.quantity<=product.criticalQuantity && product.isExist" style="color:orange" class="fa fa-lg fa-exclamation-triangle"></span>
+          <span *ngIf="!product.isExist" style="color:red" class="fa fa-lg fa-ban"></span>
+          &nbsp;{{product.title}}</td>
+        <td class="align-middle">
+          {{product.quantity|number}} {{product.unit}}
+        </td>
+        <td class="align-middle">{{product.price|number}} ريال</td>
+        <td class="align-middle">{{product.createDate}}</td>
+        <td class="align-middle">{{product.userName}}</td>
+        <td class="align-middle">
+          <button (click)="GoToEditMode(product)" class="btn btn-primary ml-1">مشاهده / ویرایش</button>
+          <button (click)="ToggleExist(product.id)" class="btn btn-secondary ml-1 col-3">
+            {{product.isExist ? 'ناموجود' : 'موجود'}}
+          </button>
+          <button (click)="currentProduct = product" data-toggle="modal" data-target="#deleteConfimation" class="btn btn-danger">
+            <span class="fa fa-times">&nbsp;</span>
+            حذف</button>
+        </td>
+      </tr>
+  </table>
+  <ng-template #nothingFound>
+    <div style="color:lightgray;width: 100%;text-align: center;" class="pt-5 border-top">
+      <h1>نتیجه ای یافت نشد...</h1>
+    </div>
+  </ng-template>
+</div>
+<confirm (onSubmit)="Delete($event)" modalId="deleteConfimation" title="حذف محصول" text="{{currentProduct.title}} حذف شود؟"></confirm>

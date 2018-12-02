@@ -1,0 +1,90 @@
+<div *ngIf="false">
+  <form class="col-8 mt-2" #f="ngForm" (ngSubmit)="Save(f.value)">
+    <div class="form-group">
+      <label for="text">عنوان</label>
+      <input required [ngClass]="{'light-error' : text.touched && text.invalid}" #text="ngModel" name="text" [(ngModel)]="MenuItem.text"
+             type="text" class="form-control col-8" id="text">
+    </div>
+    <div class="form-group">
+      <label for="icon">آیکون</label>
+      <input required [ngClass]="{'light-error' : icon.touched && icon.invalid}" #icon="ngModel" name="icon" [(ngModel)]="MenuItem.icon"
+             type="text" class="form-control col-8" id="icon" aria-describedby="iconHelp">
+      <small id="iconHelp" class="form-text text-muted">از مجموعه Font-Awesome انتخاب شود</small>
+    </div>
+    <div class="form-group">
+      <label for="tag">برچسب</label>
+      <input required [ngClass]="{'light-error' : tag.touched && tag.invalid}" type="text" #tag="ngModel" name="tag" [(ngModel)]="MenuItem.tag"
+             class="form-control col-8" id="tag">
+    </div>
+    <div class="form-group">
+      <label for="url">Url</label>
+      <input required [ngClass]="{'light-error' : url.touched && url.invalid}" type="text" #url="ngModel" name="url" [(ngModel)]="MenuItem.url"
+             class="form-control col-8" id="url">
+    </div>
+
+    <div class="form-group row col-8">
+      <div class="form-group  ml-3">
+        <label for="htmlId">Id</label>
+        <input [ngClass]="{'light-error' : htmlId.touched && htmlId.invalid}" type="text" #htmlId="ngModel" name="htmlId" [(ngModel)]="MenuItem.htmlId"
+               class="form-control" id="htmlId">
+      </div>
+      <div class="form-group">
+        <label for="SubMenuId">Id زیر شاخه</label>
+        <input [ngClass]="{'light-error' : SubMenuId.touched && SubMenuId.invalid}" type="text" #SubMenuId="ngModel" name="SubMenuId"
+               [(ngModel)]="MenuItem.SubMenuId" class="form-control" id="SubMenuId">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="menuId">پدر</label>
+      <select id="menuId" class="form-control col-8"  #menuId="ngModel" name="menuId"
+              [(ngModel)]="MenuItem.menuId" >
+        <option *ngFor="let s of menuItems" [value]="s.id">
+          {{s.text}}
+        </option>
+      </select>
+    </div>
+    <button [disabled]="!f.valid" type="submit" class="btn btn-primary">ذخیره</button>
+  </form>
+</div>
+
+<table class="table table-hover" style="text-align: center">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">عنوان</th>
+    <th scope="col">آیکون</th>
+    <th scope="col">برچسب</th>
+    <th scope="col">آدرس</th>
+    <th scope="col">موقعیت</th>
+    <th scope="col">عملیات</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let menu of menuItems;let i = index" [ngStyle]="{'color':menu.isActive ? 'black' : 'lightGray' }">
+    <th scope="row">{{i+1}}</th>
+    <td>{{menu.text}}</td>
+    <td><span class="fa {{menu.icon}} fa-lg"></span></td>
+    <td>{{menu.tag}}</td>
+    <td style="direction: ltr">{{menu.url}}</td>
+    <td><input type="number" [value]="menu.order" min="1" [max]="maxPosition" style="text-align: center;width: 30%" #order (change)="ChangeOrder(order.value,menu)" ></td>
+    <td>
+      <button (click)="RowSelect(menu);GoToEditMode()" data-toggle="tooltip" data-placement="bottom" class="btn btn-outline-secondary"
+              title="ویرایش">
+        <span class="fa fa-pencil fa-lg"></span>
+      </button>
+      <button (click)="RowSelect(menu)" data-toggle="modal" data-target="#deleteConfimation" class="btn btn-outline-warning mr-1" title="حذف">
+        <span class="fa fa-bars fa-lg"></span>
+      </button>
+      <button (click)="ToggleActive(menu.id)" data-toggle="modal" data-target="#banConfimation" [ngClass]="{'btn-outline-danger' : menu.isActive, 'btn-success': !menu.isActive}"
+              class="btn mr-1" [title]="menu.isActive? 'غیر فعال نمودن':'فعال نمودن'">
+        <span [ngClass]="{'fa-ban' : menu.isActive, 'fa-check': !menu.isActive}" class="fa fa-ban fa-lg"></span>
+      </button>
+    </td>
+  </tr>
+</table>
+<i style="color: darkgray;">
+  <span class="fa fa-exclamation-triangle fa-lg">&nbsp;</span>
+  در صورت تغییر موقعیت آیتم های منو، جهت اعمال میبایست صفحه را Refresh نمایید.
+</i>
+

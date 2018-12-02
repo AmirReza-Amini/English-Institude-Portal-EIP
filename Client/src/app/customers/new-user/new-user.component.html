@@ -1,0 +1,45 @@
+<form class="col-8 mt-2" *ngIf="showHide" #f="ngForm" (ngSubmit)="Save(f.value)">
+  <div class="form-group row">
+    <div class="form-group col 6">
+      <input required [ngClass]="{'light-error' : name.touched && name.invalid}"  #name="ngModel" name="name" [(ngModel)]="currentUser.name" type="text" class="form-control col-8" id="name"
+        placeholder="نام">
+    </div>
+    <div class="form-group col 6">
+      <input required [ngClass]="{'light-error' : family.touched && family.invalid}" #family="ngModel" name="family" [(ngModel)]="currentUser.family" type="text" class="form-control col-8" id="family"
+        placeholder="نام خانوادگی">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="input-group  col-4" style="direction: ltr">
+      <div class="input-group-prepend">
+        <div (click)="showCalendar = !showCalendar" class="btn btn-secondary" id="btnGroupAddon">
+          <span class="fa fa-calendar"></span>
+        </div>
+      </div>
+      <input type="text" readonly name="birthDate" class="form-control col"
+        placeholder="تاریخ تولد" style="direction:rtl" value="{{tool.GenerateBirthDateString(currentUser.birthDate)}}">
+    </div>
+    <input *ngIf="showCalendar" name="birthDay" #birthDay="ngModel" [(ngModel)]="currentUser.birthDate[2]" type="number" min="1"
+      max="31" class="form-control col-1 mr-2" id="birthDay" placeholder="روز">
+    <input *ngIf="showCalendar" name="birthMonth" #birthMonth="ngModel" [(ngModel)]="currentUser.birthDate[1]" type="number"
+      min="1" max="12" class="form-control col-1 mr-2" id="birthMonth" placeholder="ماه">
+    <input *ngIf="showCalendar" name="birthYear" #birthYear="ngModel" [(ngModel)]="currentUser.birthDate[0]" type="number" min="1300"
+      class="form-control col-2 mr-2" id="birthYear" placeholder="سال">
+  </div>
+  <div class="form-group">
+    <input required [ngClass]="{'light-error' : email.touched && email.invalid}"  type="email" #email="ngModel" name="email" [(ngModel)]="currentUser.email" class="form-control col-8" id="email" aria-describedby="emailHelp"
+      placeholder="آدرس ایمیل">
+    <small id="emailHelp" class="form-text text-muted">ایمیل شما به دیگران نمایش داده نخواهد شد</small>
+  </div>
+  <div class="form-group row">
+    <input required [ngClass]="{'light-error' : password.touched && password.invalid}" type="password" #password="ngModel" name="password" [(ngModel)]="currentUser.password" class="form-control col-4 ml-2 mr-3"
+      id="password" placeholder="کلمه عبور">
+    <input validateEqual="password" [ngClass]="{'light-error' :confirmPassword.valid ||(confirmPassword.pristine) }" #confirmPassword type="password" class="form-control col-4" id="confirmPassword" placeholder="تکرار کلمه عبور">
+  </div>
+  <div class="form-check" style="direction:ltr">
+    <input type="checkbox" #isActive="ngModel" name="isActive" [(ngModel)]="currentUser.isActive" class="form-check-input" id="isActive">
+    <label class="form-check-label" for="isActive">فعال؟</label>
+  </div>
+  <button [disabled]="!f.valid" type="submit" class="btn btn-primary">ذخیره</button>
+  <button class="btn btn-danger mr-2" *ngIf="showHide" (click)="Reset()">انصراف</button>
+</form>

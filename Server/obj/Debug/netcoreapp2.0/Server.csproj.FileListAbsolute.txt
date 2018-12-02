@@ -1,0 +1,11 @@
+D:\Laitec\Projects\MyPortal\PDS\Server\bin\Debug\netcoreapp2.0\Server.deps.json
+D:\Laitec\Projects\MyPortal\PDS\Server\bin\Debug\netcoreapp2.0\Server.runtimeconfig.json
+D:\Laitec\Projects\MyPortal\PDS\Server\bin\Debug\netcoreapp2.0\Server.runtimeconfig.dev.json
+D:\Laitec\Projects\MyPortal\PDS\Server\bin\Debug\netcoreapp2.0\Server.dll
+D:\Laitec\Projects\MyPortal\PDS\Server\bin\Debug\netcoreapp2.0\Server.pdb
+D:\Laitec\Projects\MyPortal\PDS\Server\obj\Debug\netcoreapp2.0\Server.csprojResolveAssemblyReference.cache
+D:\Laitec\Projects\MyPortal\PDS\Server\obj\Debug\netcoreapp2.0\Server.csproj.CoreCompileInputs.cache
+D:\Laitec\Projects\MyPortal\PDS\Server\obj\Debug\netcoreapp2.0\Server.AssemblyInfoInputs.cache
+D:\Laitec\Projects\MyPortal\PDS\Server\obj\Debug\netcoreapp2.0\Server.AssemblyInfo.cs
+D:\Laitec\Projects\MyPortal\PDS\Server\obj\Debug\netcoreapp2.0\Server.dll
+D:\Laitec\Projects\MyPortal\PDS\Server\obj\Debug\netcoreapp2.0\Server.pdb

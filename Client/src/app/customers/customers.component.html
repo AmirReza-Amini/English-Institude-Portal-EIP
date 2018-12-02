@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">مشتریان</h1>
+</div>
+
+<frm-new-user (onReset)="Reset()" (onSave)="Save()" [currentUser]="currentUser" [showHide]="AddOrEditMode">
+</frm-new-user>
+
+<div *ngIf="!AddOrEditMode">
+  <button class="btn btn-primary mb-3" (click)="AddOrEditMode = true">اضافه کردن کاربر جدید
+    <span class="fa fa-user-plus "></span>
+  </button>
+  <users-list (OnEditModeActivated)="AddOrEditMode = true" (OnDelete)="Delete($event)" (onToggleBan)="ToggleBan($event)" (OnRowSelect)="SetUser($event)"
+    [userList]="userList">
+  </users-list>
+</div>

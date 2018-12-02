@@ -1,0 +1,5 @@
+D:\Laitec\Projects\MyPortal\PDS\Server
+--output-path=obj\Release\netcoreapp2.0\
+--application-name=Server
+--content-root=D:\Laitec\Projects\MyPortal\PDS\Server
+--file=

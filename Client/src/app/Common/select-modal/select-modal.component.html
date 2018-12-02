@@ -1,0 +1,19 @@
+<div class="modal fade" [id]="modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLongTitle">{{title}}</h5>
+      </div>
+      <div class="modal-body">
+        <custom-combo type="basket-status" #select></custom-combo>
+      </div>
+      <div class="modal-footer" style="direction: ltr">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+        <button (click)="submit(select.value)" data-dismiss="modal" type="button" class="btn btn-success">تائید</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="modal fade" [id]="modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLongTitle">{{title}}</h5>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="basketDetail.length>0 else nothingFound">
+          <table class="table table-sm table-bordered table-striped" style="text-align: center">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">عنوان</th>
+                <th scope="col">تعداد</th>
+                <th scope="col">قیمت واحد</th>
+                <th scope="col">مبلغ کل</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detail of basketDetail;let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{detail.title}}</td>
+                <td>{{detail.quantity|number}} {{detail.unit}}</td>
+                <td>{{detail.unitPrice|number}} ريال</td>
+                <td>{{detail.totalPrice | number}} ريال</td>
+              </tr>
+          </table>
+          <h5>جمع کل: {{total|number}} ريال</h5>
+        </div>
+        <ng-template #nothingFound>
+          <loading></loading>
+        </ng-template>
+      </div>
+      <div class="modal-footer" style="direction: ltr">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">بستن</button>
+      </div>
+    </div>
+  </div>
+</div>

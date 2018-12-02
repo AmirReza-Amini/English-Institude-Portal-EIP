@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180807063156_Baket_Product.cs" />
+    <Compile Remove="Migrations\20180807063156_Baket_Product.Designer.cs" />
+    <Compile Remove="Migrations\20180807063913_Baket_Product.cs" />
+    <Compile Remove="Migrations\20180807063913_Baket_Product.Designer.cs" />
+    <Compile Remove="Migrations\20180807064635_Baket_Product_2.cs" />
+    <Compile Remove="Migrations\20180807064635_Baket_Product_2.Designer.cs" />
+    <Compile Remove="Migrations\20180807065133_Baket_Product.cs" />
+    <Compile Remove="Migrations\20180807065133_Baket_Product.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DTO\TsModels\ApiResultDTO.ts">
+      <CustomToolNamespace>DTO\ApiResultDTO.cs</CustomToolNamespace>
+    </None>
+    <None Update="DTO\TsModels\BasketDTO.ts">
+      <CustomToolNamespace>DTO\BasketDTO.cs</CustomToolNamespace>
+    </None>
+    <None Update="DTO\TsModels\MenuDTO.ts">
+      <CustomToolNamespace>DTO\MenuDTO.cs</CustomToolNamespace>
+    </None>
+    <None Update="DTO\TsModels\OrderUpdateDTO.ts">
+      <CustomToolNamespace>DTO\OrderUpdateDTO.cs</CustomToolNamespace>
+    </None>
+    <None Update="DTO\TsModels\ProductDTO.ts">
+      <CustomToolNamespace>DTO\ProductDTO.cs</CustomToolNamespace>
+    </None>
+    <None Update="DTO\TsModels\statusUpdateDTO.ts">
+      <CustomToolNamespace>DTO\statusUpdateDTO.cs</CustomToolNamespace>
+    </None>
+    <None Update="DTO\TsModels\UserDTO.ts">
+      <CustomToolNamespace>DTO\UserDTO.cs</CustomToolNamespace>
+    </None>
+  </ItemGroup>
+
+</Project>

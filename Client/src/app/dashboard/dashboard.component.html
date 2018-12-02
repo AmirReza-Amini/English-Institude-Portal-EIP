@@ -1,0 +1,51 @@
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/panel/setting/user-info">
+    <span class="fa fa-user" style="color: white">&nbsp;</span>
+    {{userName}}
+  </a>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="جستجو" aria-label="Search">
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" routerLink='/'>خروج</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar accordion" id="sidemenu">
+      <div class="sidebar-sticky">
+        <img class="logo" src="../../assets/img/Logo.png" alt="">
+        <ul class="nav flex-column">
+          <li *ngFor="let item of menuItems" data-toggle="collapse">
+            <div class="nav-item">
+              <a *ngIf="item.subMenu.length==0" routerLinkActive="active" routerLink="{{item.url}}" data-toggle="collapse"
+                class="nav-link" aria-expanded="true" data-parent="#sidemenu">
+                <span class="fa fa-lg {{item.icon}} ">&nbsp;</span>
+                {{item.text}}</a>
+
+              <a *ngIf="item.subMenu.length>0" routerLinkActive="active" href="#{{item.subMenuId}}" data-toggle="collapse"
+                class="nav-link" aria-expanded="true" routerLinkActive="active" [ngClass]="{'active' : current == item.tag}">
+                <span class="fa fa-lg {{item.icon}}">&nbsp;</span>
+                {{item.text}}
+                <span *ngIf="item.subMenu.length>0" class="fa fa-sort-desc"></span>
+              </a>
+            </div>
+
+            <ul *ngIf="item.subMenu.length>0" class="collapse list-unstyled" [id]="item.subMenuId" data-parent="#sidemenu">
+              <li class="sub-menu" *ngFor="let sm of item.subMenu">
+                <a routerLinkActive="active" class="nav-link" routerLink="{{sm.url}}" [queryParams]="sm.hasParam?{name:sm.text}:{}">
+                  <span class="fa {{sm.icon}} fa-lg">&nbsp;</span>
+                  {{sm.text}}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

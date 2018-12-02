@@ -1,0 +1,38 @@
+<table class="table table-hover" style="text-align: center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">نام و نام خانوادگی</th>
+      <th scope="col">ایمیل</th>
+      <th scope="col">تاریخ تولد</th>
+      <th scope="col">عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userList;let i = index" [ngStyle]="{'color':user.isActive ? 'black' : 'lightGray' }">
+      <th scope="row">{{i+1}}</th>
+      <td>{{user.name}} {{user.family}}</td>
+      <td>{{user.email}}</td>
+      <td>{{tool.GenerateBirthDateString(user.birthDate)}}</td>
+      <td>
+        <button (click)="RowSelect(user);GoToEditMode()" data-toggle="tooltip" data-placement="bottom" class="btn btn-secondary"
+          title="ویرایش">
+          <span class="fa fa-pencil fa-lg"></span>
+        </button>
+        <button (click)="RowSelect(user)" data-toggle="modal" data-target="#deleteConfimation" class="btn mr-1" title="حذف">
+          <span class="fa fa-trash fa-lg"></span>
+        </button>
+        <button (click)="RowSelect(user)" data-toggle="modal" data-target="#banConfimation" [ngClass]="{'btn-danger' : user.isActive, 'btn-success': !user.isActive}"
+          class="btn mr-1" [title]="user.isActive? 'غیر فعال نمودن':'فعال نمودن'">
+          <span [ngClass]="{'fa-ban' : user.isActive, 'fa-check': !user.isActive}" class="fa fa-ban fa-lg"></span>
+        </button>
+      </td>
+    </tr>
+</table>
+<confirm (onSubmit)="Delete($event)" modalId="deleteConfimation" title="حذف کاربر" text="{{CurrentUser?.name}} {{CurrentUser?.family}} حذف شود؟"></confirm>
+
+<confirm *ngIf="CurrentUser?.isActive" (onSubmit)="ToggleBan($event)" modalId="banConfimation" title="مسدود/عدم مسدود سازی کاربر"
+  text="{{CurrentUser?.name}} {{CurrentUser?.family}} مسدود شود؟">
+</confirm>
+<confirm *ngIf="!CurrentUser?.isActive" (onSubmit)="ToggleBan($event)" modalId="banConfimation" title="مسدود/عدم مسدود سازی کاربر"
+  text="{{CurrentUser?.name}} {{CurrentUser?.family}} رفع مسدودیت شود؟"></confirm>

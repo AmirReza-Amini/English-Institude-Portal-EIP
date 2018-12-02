@@ -1,0 +1,41 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.css";
+
+@font-face {
+  font-family: 'sans';
+  src: url('./assets/fonts/iransans.woff') format('woff'), url('./assets/fonts/iransans.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+}
+
+@font-face {
+  font-family: 'sans_bold';
+  src: url('./assets/fonts/IRANSans-Bold-web.woff') format('woff'), url('./assets/fonts/IRANSans-Bold-web.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+}
+
+@font-face {
+  font-family: 'sans_light';
+  src: url('./assets/fonts/IRANSssansLight.woff') format('woff'), url('./assets/fonts/IRANSssansLight.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+}
+
+@font-face {
+  font-family: 'sans_medium';
+  src: url('./assets/fonts/IRANSansMedium.woff') format('woff'), url('./assets/fonts/IRANSansMedium.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+}
+
+body {
+  font-size: .875rem;
+  direction: rtl;
+  text-align: right;
+  font-family: 'sans';
+}
