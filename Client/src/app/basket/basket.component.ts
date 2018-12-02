@@ -9,7 +9,8 @@ import { BasketService } from '../services/basket.service';
 })
 export class BasketComponent {
 
-  basketList = []
+  basketList = [] // Basket List
+
   seletedBasketId;
   basketDetailData = [];
   constructor(private basketService: BasketService) {
